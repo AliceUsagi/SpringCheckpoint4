@@ -16,8 +16,13 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    @GetMapping("/user/{email}/{password}")
+    public User signIn (@PathVariable String email, @PathVariable String password) {
+        return userRepository.findUserByEmailIgnoreCaseAndPassword(email, password);
+    }
+
     @GetMapping("/user/{idUser}")
-    public User readUser(@PathVariable Long idUser) {
+    public User readIdUser (@PathVariable Long idUser) {
         return userRepository.findById(idUser).get();
     }
 
