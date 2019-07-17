@@ -1,7 +1,5 @@
 package com.wildcodeschool.book.entity;
 
-import org.springframework.data.repository.cdi.Eager;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +13,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idUser;
 
     @NotNull
     @NotEmpty
@@ -32,12 +30,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public String getName() {
