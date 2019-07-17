@@ -1,9 +1,8 @@
 package com.wildcodeschool.book.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -26,6 +25,11 @@ public class Book implements Serializable {
     @NotNull
     @NotEmpty
     private String resume;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    @JsonIgnore
+    private User user;
 
     public Book() {
     }
@@ -60,5 +64,13 @@ public class Book implements Serializable {
 
     public void setResume(String resume) {
         this.resume = resume;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

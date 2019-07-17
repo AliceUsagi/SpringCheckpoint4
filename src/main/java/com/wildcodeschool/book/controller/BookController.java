@@ -1,12 +1,11 @@
 package com.wildcodeschool.book.controller;
 
 import com.wildcodeschool.book.entity.Book;
+import com.wildcodeschool.book.entity.User;
 import com.wildcodeschool.book.repository.BookRepository;
+import com.wildcodeschool.book.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,13 +15,19 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
-    @PostMapping("/book")
-    public Book createBook(@RequestBody Book book) {
-        return bookRepository.save(book);
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/book")
     public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @PostMapping("/user/{userId}/book")
+    public Book createRecipe(@PathVariable Long userId,
+                               @RequestBody Book book) {
+        User user = userRepository.findById(userId).get();
+        book.setUser(user);
+        return bookRepository.save(book);
     }
 }
